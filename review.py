@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-review.py — CLI code reviewer that checks a file or directory against your
+review.py, CLI code reviewer that checks a file or directory against your
 team's guidelines + examples, using the persona in persona.md as the system
-prompt. Runs against a local Ollama server — no API key required.
+prompt. Runs against a local Ollama server, no API key required.
 
 Usage:
     ollama pull codellama:13b        # or any model you prefer
@@ -208,7 +208,7 @@ def main():
     parser.add_argument(
         "--model", default=DEFAULT_MODEL,
         help=f"Ollama model tag to use (default: {DEFAULT_MODEL}). "
-             f"Must already be pulled — run `ollama pull <model>` first.",
+             f"Must already be pulled, run `ollama pull <model>` first.",
     )
     parser.add_argument(
         "--host", default=DEFAULT_HOST,
@@ -259,7 +259,7 @@ def main():
         if not corrected_files:
             print(
                 "Warning: model response didn't contain any parseable "
-                "<<<FILE:...>>> blocks — nothing written to disk. Raw "
+                "<<<FILE:...>>> blocks, nothing written to disk. Raw "
                 "response is still included below/in --output.",
                 file=sys.stderr,
             )

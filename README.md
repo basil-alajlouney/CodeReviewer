@@ -7,7 +7,7 @@ key, nothing leaves your machine.
 ## Setup
 
 1. Install [Ollama](https://ollama.com) and make sure it's running.
-2. Pull a model — pick something decent at code:
+2. Pull a model, pick something decent at code:
    ```bash
    ollama pull qwen2.5-coder
    # or: ollama pull codellama   /   ollama pull llama3.1   /   ollama pull deepseek-coder-v2
@@ -21,8 +21,8 @@ key, nothing leaves your machine.
 
 ```
 refs/
-  guidelines.md          # required — your team's coding guidelines
-  examples/               # optional — before/after snippets, any text files
+  guidelines.md          # required, your team's coding guidelines
+  examples/               # optional, before/after snippets, any text files
     naming.md
     error_handling.py
     ...
@@ -45,7 +45,7 @@ Review and also generate a corrected version:
 python review.py --references ./refs --target ./src --fix
 ```
 Corrected files are written as real, ready-to-use files under `./corrected/`
-(mirroring the original relative paths) — not just printed as text you'd
+(mirroring the original relative paths), not just printed as text you'd
 have to copy out by hand.
 
 Choose where corrected files get written:
@@ -70,7 +70,7 @@ python review.py --references ./refs --target ./src --host http://192.168.1.50:1
 
 ## How it works
 
-1. `persona.md` is sent as the system message — it defines the reviewer's
+1. `persona.md` is sent as the system message, it defines the reviewer's
    role, process, severity levels, and output format.
 2. The script reads `guidelines.md`, everything under `examples/`, and every
    reviewable file under `--target`, and bundles them into one user message.
@@ -87,7 +87,7 @@ python review.py --references ./refs --target ./src --host http://192.168.1.50:1
    <<<END FILE>>>
    ```
    The script extracts these blocks and writes real files to `--fix-output`
-   (default `./corrected/`), preserving relative paths — so you get usable
+   (default `./corrected/`), preserving relative paths, so you get usable
    files, not text to copy-paste out of a report. A `## Changelog` explaining
    each change stays in the printed/saved report, separate from the code.
 5. Before running, the script checks the requested model is already pulled
@@ -98,12 +98,12 @@ python review.py --references ./refs --target ./src --host http://192.168.1.50:1
 - Binary/asset files (images, PDFs, lockfiles, etc.) and common noise
   directories (`.git`, `node_modules`, `__pycache__`, `dist`, `build`, ...)
   are skipped automatically when walking a directory.
-- Model quality varies a lot more here than with a hosted frontier model —
+- Model quality varies a lot more here than with a hosted frontier model,
   a small local model may under-cite or miss subtler guideline violations.
   `qwen2.5-coder` or `deepseek-coder-v2` tend to hold up best for this kind
   of structured, citation-heavy review task.
-- For large codebases, point `--target` at one file or module at a time —
+- For large codebases, point `--target` at one file or module at a time,
   everything gets bundled into a single request, and local models generally
   have smaller context windows than hosted ones, so this matters more here.
-- No `ANTHROPIC_API_KEY` or any API key is needed — everything runs against
+- No `ANTHROPIC_API_KEY` or any API key is needed, everything runs against
   your local Ollama server (default `http://localhost:11434`).
